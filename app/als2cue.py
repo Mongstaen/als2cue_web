@@ -31,6 +31,8 @@ def getChapters(stream, filename):
             if locator.time > 0 and j == 1:
                 cue += "    TRACK 01 AUDIO\n"
                 cue += "        TITLE \"\"\n"
+                cue += "        PERFORMER \"\"\n"
+                cue += "        REM MAIRLIST_ITEMTYPE \"Music\"\n"
                 cue += "        INDEX 01 %s\n" % formatTimestamp(0)
                 chapters.append({
                     "chapter_number": j + j_offset, 
@@ -38,9 +40,15 @@ def getChapters(stream, filename):
                     "chapter_title": ""
                 })
                 j_offset = 1
-
+            
+            if not (" - " in locator.text): 
+                locator.text = locator.text+" - "       
+            artist, title = locator.text.split(" - ")
+            
             cue += "    TRACK %s AUDIO\n" % leadingZero(j + j_offset)
-            cue += "        TITLE \"%s\"\n" % locator.text.replace("\"", "\\\"")
+            cue += "        TITLE \"%s\"\n" % title.replace("\"", "\\\"")
+            cue += "        PERFORMER \"%s\"\n" % artist.replace("\"", "\\\"")
+            cue += "        REM MAIRLIST_ITEMTYPE \"Music\"\n"
             cue += "        INDEX 01 %s\n" % formatTimestamp(locator.time)
             chapters.append({
                 "chapter_number": j + j_offset, 
