@@ -3,8 +3,6 @@ Tweaked per requirement of my local radio channel who needed the artist and titl
 
 All credit to lucatnt!
 
-## Demo installation
-If you're not a developer and just need this tool, you can use my demo install at [als2cue.lucatnt.com](https://als2cue.lucatnt.com/).
 
 ## How to use this thing
 You can either run this with Python (it requires Flask, so `pip3 install flask`), and the below dawtool!
